@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductsPage(props) {
 
-    // const buttonHandler = () => {
-    //     setProductData('')
-    // }
+
 
     return (
         <div className='row'>
@@ -15,8 +13,7 @@ export default function ProductsPage(props) {
                         <div className="card w-125 h-100">
                             <div className="card-body bg-info">
                                 <h5 className="card-title">{item.name}</h5>
-                                <Link to={`/product/${item.id}`}>
-                                    <button type="button" class="btn btn-outline-light">More Info</button></Link>
+                                <Link to={`/product/${item.id}`}><button type="button" class="btn btn-outline-light">More Info</button></Link>
                             </div>
                         </div>
                     </div>

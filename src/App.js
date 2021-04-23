@@ -12,13 +12,13 @@ export default function App() {
   const axiosGet = () => {
     let apiUrl = 'https://awesomeincbootcampapi-ianrios529550.codeanyapp.com/api/store/products'
     axios.get(apiUrl)
+    // handle success
       .then(function (response) {
-        // handle success
         setProductsData(response.data)
       })
 
+    // handle error
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
   }
