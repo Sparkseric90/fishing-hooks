@@ -1,25 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import ProductsPage from './ProductsPage';
+import ItemPage from './ItemPage';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Link, Switch, Route, useParams} from 'react-router-dom';
 
-function App() {
+export default function App() {
+  const [productsData, setProductsData] = useState([])
+
+
+  const axiosGet = () => {
+    let apiUrl = 'https://awesomeincbootcampapi-ianrios529550.codeanyapp.com/api/store/products'
+    axios.get(apiUrl)
+      .then(function (response) {
+        // handle success
+        setProductsData(response.data)
+      })
+
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+  }
+
+  useEffect(axiosGet, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container mt-5">
+      <Router>
+        <div className="row text-center">
+          <div className="col">
+            <h1> Peg Leg Pete's Pier of Fishing! </h1>
+            <Link to="/"><button type="button" class="btn btn-outline-info">View Cart!</button></Link>
+            <Switch>
+              <Route exact={true} path="/">
+                <ProductsPage productsData={productsData} />
+              </Route>
+              <Route path="/product/:id">
+                <ItemPage productsData={productsData}/>
+              </Route>
+            </Switch>
+          </div>
+        </div>
+      </Router>
     </div>
   );
 }
-
-export default App;
